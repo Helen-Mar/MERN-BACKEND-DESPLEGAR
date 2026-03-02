@@ -1,3 +1,4 @@
+const path = require('path');
 require('dotenv').config();
 const cors = require('cors');
 // console.log('Variable MONGODB_CNN:', process.env.DB_CNN);
@@ -29,6 +30,10 @@ app.use('/api/auth', require('./routes/auth'));
 
 // TODO: crud: eventos
 app.use('/api/events', require('./routes/events'));
+
+app.use('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public/index.html'));
+});
 
 // escuchar peticiones
 app.listen(process.env.PORT, () => {
